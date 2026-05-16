@@ -1,149 +1,191 @@
-# Conditional Date Generative Models
+# Conditional Date Generation — Assignment 1
 
-This repository contains the implementation of four distinct generative AI models designed to solve a structured sequence generation task: generating valid dates (`dd-mm-yyyy`) conditioned on four discrete categorical inputs (Day of Week, Month, Leap Year status, and Decade).
+## Quick-Start: Exact Steps to Run Everything
 
-Because multiple valid dates can exist for a single set of conditions, standard cross-entropy accuracy is an invalid evaluation metric. This project utilizes a custom Condition Satisfaction Rate powered by Python's native `calendar` module to validate outputs.
+Follow these steps **in order**. Each step is a single command.
 
-## Repository Structure
+---
 
-```text
-repo/
-├── data/
-│   ├── data.txt                      # Full training dataset
-│   └── example_input.txt             # Sample input for testing predict.py
-├── model/
-│   ├── predict.py                    # REQUIRED EXACT PATH: Inference script
-│   ├── train_all.py                  # Master training loop for all 4 models
-│   ├── evaluate.py                   # Computes condition satisfaction metrics
-│   ├── models/
-│   │   ├── __init__.py
-│   │   ├── cgan.py                   # Model 1: Conditional WGAN-GP
-│   │   ├── seq2seq_transformer.py    # Model 2: Encoder-Decoder Transformer
-│   │   ├── autoregressive.py         # Model 3: Decoder-Only Transformer
-│   │   └── cvae.py                   # Model 4: Conditional VAE
-│   ├── utils/
-│   │   ├── __init__.py
-│   │   ├── tokenizer.py              # Vocabulary and encoding/decoding
-│   │   ├── dataset.py                # Dataset loader and sampler
-│   │   ├── metrics.py                # Condition satisfaction evaluator
-│   │   └── date_validator.py         # Calendar-based validation
-│   └── weights/                      # Saved model weights
-│       ├── cgan_gen.pt
-│       ├── seq2seq.pt
-│       ├── autoregressive.pt
-│       └── cvae.pt
-├── environment.yml                   # Conda environment configuration
-├── README.md                         # Project documentation
-└── Assignment_1_YourName_YourID.pdf  # Final report
-```
-
-## Model Architectures
-
-### 1. Conditional WGAN-GP (`cgan.py`)
-A Wasserstein GAN with Gradient Penalty for stable training and reduced mode collapse. The generator uses Gumbel-Softmax to enable gradient flow through discrete token generation.
-
-### 2. Seq2Seq Transformer (`seq2seq_transformer.py`)
-An encoder-decoder Transformer where the condition tokens are encoded and the target date is generated autoregressively.
-
-### 3. Autoregressive Transformer (`autoregressive.py`)
-A decoder-only Transformer with causal masking. The input conditions act as a prompt for generating the date token-by-token.
-
-### 4. Conditional VAE (`cvae.py`)
-A Variational Autoencoder that learns a latent distribution over valid dates while conditioning on the input constraints.
-
-## Setup and Installation
-
-This project uses Conda for dependency and environment management.
+### Step 0 — Clone & place data
 
 ```bash
-# Create environment
-conda env create -f environment.yml
+git clone git@github.com:YOUR_USERNAME/YOUR_REPO.git
+cd YOUR_REPO
 
-# Activate environment
+# Place the provided files:
+cp /path/to/data.txt          data/data.txt
+cp /path/to/example_input.txt data/example_input.txt
+```
+
+---
+
+### Step 1 — Create conda environment
+
+```bash
+conda env create -f environment.yml
 conda activate date_gen
 ```
 
-## Usage Guide
+---
 
-### Training
-
-Train all four models sequentially using:
+### Step 2 — Install MLflow (if not pulled by conda)
 
 ```bash
-python model/train_all.py
+pip install mlflow>=2.9.0
 ```
 
-The training pipeline:
-- Splits the dataset into training, validation, and test sets
-- Applies weighted sampling to address class imbalance
-- Saves the best model weights in `model/weights/`
+---
 
-### Evaluation
-
-Evaluate trained models using:
+### Step 3 — Train all models (with auto-resume)
 
 ```bash
-python model/evaluate.py
+cd model
+python train_all.py --data_path ../data/data.txt
 ```
 
-The evaluation script computes:
-- Day condition accuracy
-- Month condition accuracy
-- Leap year accuracy
-- Decade accuracy
-- Valid date rate
-- Full pass rate
+**If training is interrupted**, simply re-run the same command.  
+The `--resume` flag is on by default. Training picks up from the last  
+completed epoch for each model via `weights/<model>_checkpoint.pt`.
 
-### Inference
+Train a single model only:
+```bash
+python train_all.py --data_path ../data/data.txt --models autoregressive
+```
 
-Run inference using:
+Override epoch counts:
+```bash
+python train_all.py --data_path ../data/data.txt \
+    --epochs_gan 100 --epochs_seq 50 --epochs_ar 50 --epochs_cvae 50
+```
+
+Force restart from epoch 1 (ignore checkpoints):
+```bash
+python train_all.py --data_path ../data/data.txt --no_resume
+```
+
+---
+
+### Step 4 — Monitor training with MLflow
+
+In a **separate terminal**:
+```bash
+conda activate date_gen
+mlflow ui --port 5000
+```
+Open **http://localhost:5000** in your browser.  
+Every epoch's metrics are logged there in real time.
+
+---
+
+### Step 5 — Run inference (required assignment interface)
 
 ```bash
-python model/predict.py -i <input_file> -o <output_file>
+python model/predict.py \
+    -i data/example_input.txt \
+    -o data/predictions.txt
 ```
 
-Example:
-
-```bash
-python model/predict.py -i data/example_input.txt -o predictions.txt
+Output format (matches `data.txt` exactly):
 ```
-
-### Input Format
-
-```text
-[WED] [JAN] [False] [180]
-```
-
-### Output Format
-
-```text
 [WED] [JAN] [False] [180] 1-1-1800
+[MON] [JAN] [False] [190] 5-1-1901
+...
 ```
 
-## Evaluation Metric
+---
 
-The primary evaluation metric is `full_pass_rate`.
+### Step 6 — Evaluate all models on the test set
 
-A generated output passes evaluation only if:
-- It forms a valid Gregorian calendar date
-- The year is within the range `1800-2200`
-- The generated date satisfies all four requested conditions
+```bash
+python model/evaluate.py --data_path data/data.txt --output_dir eval_results
+```
 
-Validation is performed using Python's built-in `calendar` and `datetime` utilities.
+Produces:
+- `eval_results/evaluation_report.csv` — per-model condition satisfaction rates
+- `eval_results/example_outputs.txt`   — sample predictions for the report
 
-## Dependencies
+---
 
-Main libraries used in this project:
-- Python 3.10+
-- PyTorch
-- NumPy
-- Pandas
-- tqdm
+### Step 7 — Run compliance checker
 
-All required dependencies are listed in `environment.yml`.
+```bash
+python scripts/check_compliance.py
+```
 
-## Notes
+This verifies every assignment rule:
+- Repo structure ✓
+- predict.py CLI interface ✓
+- Output format ✓
+- Date range [1800–2200] ✓
+- All 4 conditions satisfied ✓
+- GAN implementation ✓
+- Bonus best practices ✓
 
-- All models are implemented in PyTorch.
-- Model checkpoints are stored in `model/weights/`.
-- The repository follows a modular structure for easier experimentation and extension.
+---
+
+### Step 8 — Push to GitHub
+
+**First time:**
+```bash
+chmod +x scripts/github_setup.sh
+./scripts/github_setup.sh YOUR_GITHUB_USERNAME YOUR_REPO_NAME
+```
+
+**Subsequent pushes:**
+```bash
+./scripts/push.sh "your commit message"
+```
+
+---
+
+## File Structure
+
+```
+repo/
+├── data/
+│   ├── data.txt                    ← full dataset (place here)
+│   └── example_input.txt           ← assignment-provided input
+├── model/
+│   ├── predict.py                  ← REQUIRED: python predict.py -i ... -o ...
+│   ├── train_all.py                ← trains all 4 models (with MLflow + resume)
+│   ├── evaluate.py                 ← test-set evaluation
+│   ├── models/
+│   │   ├── cgan.py                 ← Model 1: Conditional WGAN-GP
+│   │   ├── seq2seq_transformer.py  ← Model 2: Enc-Dec Transformer
+│   │   ├── autoregressive.py       ← Model 3: Decoder-Only Transformer
+│   │   └── cvae.py                 ← Model 4: Conditional VAE
+│   ├── utils/
+│   │   ├── tokenizer.py            ← custom year-first tokeniser
+│   │   ├── date_validator.py       ← calendar.isleap() based validator + fallback
+│   │   ├── dataset.py              ← Dataset, WeightedRandomSampler, DataLoaders
+│   │   └── metrics.py              ← condition_satisfaction_rate (primary metric)
+│   └── weights/                    ← checkpoints & best-model weights saved here
+├── mlruns/                         ← MLflow tracking data (auto-created)
+├── scripts/
+│   ├── github_setup.sh             ← one-shot git init + push to GitHub
+│   ├── push.sh                     ← quick commit-and-push
+│   └── check_compliance.py         ← verifies all assignment rules
+├── environment.yml
+└── Assignment_1_YourName_YourID.md ← report
+```
+
+## Resume Logic
+
+| File | Purpose |
+|---|---|
+| `weights/<model>_checkpoint.pt` | Full checkpoint saved **every epoch** (model + optimizer + scheduler + epoch + best_score) |
+| `weights/<model>_run_id.txt` | MLflow run_id — lets resumed training append to the **same** MLflow run |
+| `weights/<model>.pt` | Best model weights only (saved when `full_pass_rate` improves) |
+| `weights/training_log.csv` | CSV copy of all epoch metrics (backup if MLflow unavailable) |
+
+If training crashes at epoch 37 out of 50, re-running `train_all.py` will:
+1. Load `weights/seq2seq_checkpoint.pt` → restore model, optimizer, scheduler
+2. Read `weights/seq2seq_run_id.txt` → resume the same MLflow run
+3. Continue from epoch 38, not epoch 1
+
+## Primary Evaluation Metric
+
+`full_pass_rate` = fraction of generated dates satisfying **all four** conditions simultaneously.
+
+Accuracy is NOT used — multiple valid outputs exist per input.
+```

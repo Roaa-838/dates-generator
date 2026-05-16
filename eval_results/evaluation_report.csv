@@ -1,0 +1,9 @@
+model,mode,valid_date_rate,day_pass_rate,month_pass_rate,leap_pass_rate,decade_pass_rate,full_pass_rate
+cgan,raw,0.9679,0.1413,0.8845,0.9143,0.8813,0.1107
+cgan,corrected,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000
+seq2seq,raw,1.0000,0.1476,1.0000,1.0000,1.0000,0.1476
+seq2seq,corrected,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000
+autoregressive,raw,1.0000,0.1548,1.0000,1.0000,1.0000,0.1548
+autoregressive,corrected,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000
+cvae,raw,0.9432,0.1356,0.9432,0.9406,0.9432,0.1353
+cvae,corrected,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000

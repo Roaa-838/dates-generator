@@ -1,0 +1,240 @@
+Model       : cgan
+Condition   : [SAT] [APR] [False] [181]
+Raw output  : 15-4-1819
+Corrected   : 3-4-1819
+Ground truth: 11-4-1818
+
+Model       : cgan
+Condition   : [MON] [NOV] [False] [195]
+Raw output  : 25-11-1959
+Corrected   : 2-11-1959
+Ground truth: 1-11-1954
+
+Model       : cgan
+Condition   : [SUN] [FEB] [True] [186]
+Raw output  : 4-2-1860
+Corrected   : 5-2-1860
+Ground truth: 7-2-1864
+
+Model       : cgan
+Condition   : [MON] [MAY] [False] [209]
+Raw output  : 17-5-2095
+Corrected   : 2-5-2095
+Ground truth: 11-5-2093
+
+Model       : cgan
+Condition   : [WED] [OCT] [True] [182]
+Raw output  : 6-10-1828
+Corrected   : 1-10-1828
+Ground truth: 1-10-1828
+
+Model       : cgan
+Condition   : [THU] [AUG] [False] [189]
+Raw output  : 28-8-1897
+Corrected   : 5-8-1897
+Ground truth: 30-8-1894
+
+Model       : cgan
+Condition   : [TUE] [OCT] [False] [211]
+Raw output  : 22-10-2113
+Corrected   : 3-10-2113
+Ground truth: 7-10-2110
+
+Model       : cgan
+Condition   : [THU] [OCT] [True] [191]
+Raw output  : 30-10-1936
+Corrected   : 3-10-1912
+Ground truth: 5-10-1916
+
+Model       : cgan
+Condition   : [SUN] [JUN] [False] [214]
+Raw output  : 17-6-2146
+Corrected   : 5-6-2146
+Ground truth: 17-6-2142
+
+Model       : cgan
+Condition   : [SUN] [DEC] [False] [186]
+Raw output  : 1-12-1869
+Corrected   : 5-12-1869
+Ground truth: 30-12-1866
+
+Model       : seq2seq
+Condition   : [SAT] [APR] [False] [181]
+Raw output  : 15-4-1819
+Corrected   : 3-4-1819
+Ground truth: 11-4-1818
+
+Model       : seq2seq
+Condition   : [MON] [NOV] [False] [195]
+Raw output  : 15-11-1957
+Corrected   : 4-11-1957
+Ground truth: 1-11-1954
+
+Model       : seq2seq
+Condition   : [SUN] [FEB] [True] [186]
+Raw output  : 15-2-1868
+Corrected   : 2-2-1868
+Ground truth: 7-2-1864
+
+Model       : seq2seq
+Condition   : [MON] [MAY] [False] [209]
+Raw output  : 15-5-2097
+Corrected   : 6-5-2097
+Ground truth: 11-5-2093
+
+Model       : seq2seq
+Condition   : [WED] [OCT] [True] [182]
+Raw output  : 15-10-1828
+Corrected   : 1-10-1828
+Ground truth: 1-10-1828
+
+Model       : seq2seq
+Condition   : [THU] [AUG] [False] [189]
+Raw output  : 15-8-1899
+Corrected   : 3-8-1899
+Ground truth: 30-8-1894
+
+Model       : seq2seq
+Condition   : [TUE] [OCT] [False] [211]
+Raw output  : 15-10-2119
+Corrected   : 3-10-2119
+Ground truth: 7-10-2110
+
+Model       : seq2seq
+Condition   : [THU] [OCT] [True] [191]
+Raw output  : 15-10-1916
+Corrected   : 5-10-1916
+Ground truth: 5-10-1916
+
+Model       : seq2seq
+Condition   : [SUN] [JUN] [False] [214]
+Raw output  : 28-6-2147
+Corrected   : 4-6-2147
+Ground truth: 17-6-2142
+
+Model       : seq2seq
+Condition   : [SUN] [DEC] [False] [186]
+Raw output  : 15-12-1867
+Corrected   : 1-12-1867
+Ground truth: 30-12-1866
+
+Model       : autoregressive
+Condition   : [SAT] [APR] [False] [181]
+Raw output  : 23-4-1810
+Corrected   : 7-4-1810
+Ground truth: 11-4-1818
+
+Model       : autoregressive
+Condition   : [MON] [NOV] [False] [195]
+Raw output  : 13-11-1951
+Corrected   : 5-11-1951
+Ground truth: 1-11-1954
+
+Model       : autoregressive
+Condition   : [SUN] [FEB] [True] [186]
+Raw output  : 11-2-1860
+Corrected   : 5-2-1860
+Ground truth: 7-2-1864
+
+Model       : autoregressive
+Condition   : [MON] [MAY] [False] [209]
+Raw output  : 23-5-2090
+Corrected   : 1-5-2090
+Ground truth: 11-5-2093
+
+Model       : autoregressive
+Condition   : [WED] [OCT] [True] [182]
+Raw output  : 23-10-1820
+Corrected   : 4-10-1820
+Ground truth: 1-10-1828
+
+Model       : autoregressive
+Condition   : [THU] [AUG] [False] [189]
+Raw output  : 23-8-1890
+Corrected   : 7-8-1890
+Ground truth: 30-8-1894
+
+Model       : autoregressive
+Condition   : [TUE] [OCT] [False] [211]
+Raw output  : 23-10-2110
+Corrected   : 7-10-2110
+Ground truth: 7-10-2110
+
+Model       : autoregressive
+Condition   : [THU] [OCT] [True] [191]
+Raw output  : 13-10-1912
+Corrected   : 3-10-1912
+Ground truth: 5-10-1916
+
+Model       : autoregressive
+Condition   : [SUN] [JUN] [False] [214]
+Raw output  : 13-6-2149
+Corrected   : 1-6-2149
+Ground truth: 17-6-2142
+
+Model       : autoregressive
+Condition   : [SUN] [DEC] [False] [186]
+Raw output  : 13-12-1867
+Corrected   : 1-12-1867
+Ground truth: 30-12-1866
+
+Model       : cvae
+Condition   : [SAT] [APR] [False] [181]
+Raw output  : 29-4-1819
+Corrected   : 3-4-1819
+Ground truth: 11-4-1818
+
+Model       : cvae
+Condition   : [MON] [NOV] [False] [195]
+Raw output  : 14-11-1959
+Corrected   : 2-11-1959
+Ground truth: 1-11-1954
+
+Model       : cvae
+Condition   : [SUN] [FEB] [True] [186]
+Raw output  : 26-2-1860
+Corrected   : 5-2-1860
+Ground truth: 7-2-1864
+
+Model       : cvae
+Condition   : [MON] [MAY] [False] [209]
+Raw output  : 11-5-2097
+Corrected   : 6-5-2097
+Ground truth: 11-5-2093
+
+Model       : cvae
+Condition   : [WED] [OCT] [True] [182]
+Raw output  : 6-10-1828
+Corrected   : 1-10-1828
+Ground truth: 1-10-1828
+
+Model       : cvae
+Condition   : [THU] [AUG] [False] [189]
+Raw output  : 19-8-1899
+Corrected   : 3-8-1899
+Ground truth: 30-8-1894
+
+Model       : cvae
+Condition   : [TUE] [OCT] [False] [211]
+Raw output  : 33-10-2113
+Corrected   : 3-10-2113
+Ground truth: 7-10-2110
+
+Model       : cvae
+Condition   : [THU] [OCT] [True] [191]
+Raw output  : 9-10-1916
+Corrected   : 5-10-1916
+Ground truth: 5-10-1916
+
+Model       : cvae
+Condition   : [SUN] [JUN] [False] [214]
+Raw output  : 18-6-2145
+Corrected   : 6-6-2145
+Ground truth: 17-6-2142
+
+Model       : cvae
+Condition   : [SUN] [DEC] [False] [186]
+Raw output  : 8-12-1867
+Corrected   : 1-12-1867
+Ground truth: 30-12-1866
+

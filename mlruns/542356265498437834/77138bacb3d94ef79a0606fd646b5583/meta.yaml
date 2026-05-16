@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/roaar/dates-generator/mlruns/542356265498437834/77138bacb3d94ef79a0606fd646b5583/artifacts
+end_time: 1778783735850
+entry_point_name: ''
+experiment_id: '542356265498437834'
+lifecycle_stage: active
+run_id: 77138bacb3d94ef79a0606fd646b5583
+run_name: cvae
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1778782654219
+status: 3
+tags: []
+user_id: roaar

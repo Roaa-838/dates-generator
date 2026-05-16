@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/roaar/dates-generator/mlruns/542356265498437834/5d2e294543b94ca0ac178533ae434db5/artifacts
+end_time: 1778778280260
+entry_point_name: ''
+experiment_id: '542356265498437834'
+lifecycle_stage: active
+run_id: 5d2e294543b94ca0ac178533ae434db5
+run_name: cgan
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1778764622671
+status: 3
+tags: []
+user_id: roaar

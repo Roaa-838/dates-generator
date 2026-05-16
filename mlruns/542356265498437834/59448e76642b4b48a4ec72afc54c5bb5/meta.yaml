@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/roaar/dates-generator/mlruns/542356265498437834/59448e76642b4b48a4ec72afc54c5bb5/artifacts
+end_time: 1778780940385
+entry_point_name: ''
+experiment_id: '542356265498437834'
+lifecycle_stage: active
+run_id: 59448e76642b4b48a4ec72afc54c5bb5
+run_name: seq2seq
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1778778280412
+status: 3
+tags: []
+user_id: roaar

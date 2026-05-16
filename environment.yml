@@ -1,0 +1,16 @@
+name: date_gen
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pytorch>=2.1.0
+  - torchvision
+  - numpy>=1.24
+  - tqdm>=4.65
+  - pip
+  - pip:
+      - mlflow>=2.9.0
+      - gitpython>=3.1.0
